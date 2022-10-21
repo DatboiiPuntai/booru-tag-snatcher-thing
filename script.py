@@ -2,8 +2,12 @@ from dataclasses import dataclass
 from bs4 import BeautifulSoup
 import requests
 import wget
+import os
 
-url = 'https://danbooru.donmai.us/posts/5730810?q=minato_aqua+rating%3Ag+'
+url = 'https://danbooru.donmai.us/posts/4359893?q=minato_aqua+rating%3Ag+order%3Ascore'
+
+destination = r"D:\Users\Pantai Suyasri\Pictures\TrainingData\MinatoAqua\DanbooruAqua"
+cwd = r'D:\Users\Pantai Suyasri\Documents\GitHub\booru-tag-snatcher-thing'
 
 def make_data(url):
     data = requests.get(url)
@@ -29,3 +33,7 @@ def make_data(url):
         f.write(tags_string)
 
 make_data(url)
+
+for file in os.listdir():
+    if file != 'script.py' and file != '.git' and '.txt' not in file:
+        os.rename(os.path.join(cwd, file), os.path.join(destination, file))
